@@ -1,11 +1,11 @@
-  if( diyvodid > 0)
+    if( diyvodid > 0)
 	{var dmid=diyid,dmsid=diysid;}
 	else
 	{
 	var dmid=vodid,dmsid=vodsid;
 	}
-  if( laoding > 0){}else{ var css ='<style type="text/css">';css+='#loading-box{display: none;}';css+='</style>';$('body').append(css).addClass("");}    // 加载播放器 
-  if( danmuon > 0){
+        if( laoding > 0){}else{ var css ='<style type="text/css">';css+='#loading-box{display: none;}';css+='</style>';$('body').append(css).addClass("");}    // 加载播放器
+    if( danmuon > 0){
 	var dp = new yzmplayer({autoplay: autoplay,element: document.getElementById('player'),theme: color,logo: logo,video: {url: vodurl,pic: vodpic,type: 'auto',},danmaku: {id: dmid,api: dmapi,user: user,}});
 	}else{$('body').addClass("danmu-off");
 	var dp = new yzmplayer({autoplay: autoplay,element: document.getElementById('player'),theme: color,logo: logo,video: {url: vodurl,pic: vodpic,type: 'auto',},});}
@@ -18,7 +18,7 @@
     function formatTime(seconds) {return [parseInt(seconds / 60 / 60),parseInt(seconds / 60 % 60),parseInt(seconds % 60)].join(":").replace(/\b(\d)\b/g, "0$1");}
 	//设置浏览器缓存项值，参数：项名,值,有效时间(小时)
 	function setCookie(c_name, value, expireHours) {var exdate = new Date();exdate.setHours(exdate.getHours() + expireHours);document.cookie = c_name + "=" + escape(value) + ((expireHours === null) ? "" : ";expires=" + exdate.toGMTString());}
-	////获取浏览器缓存项值，参数：项名
+	//获取浏览器缓存项值，参数：项名
 	function getCookie(c_name) {if (document.cookie.length > 0) {c_start = document.cookie.indexOf(c_name + "=");if (c_start !== -1) {c_start = c_start + c_name.length + 1;c_end = document.cookie.indexOf(";", c_start);if (c_end === -1) {c_end = document.cookie.length;};return unescape(document.cookie.substring(c_start, c_end));}}return "";}
 	dp.on("loadedmetadata", function () {loadedmetadataHandler();});
     dp.on("ended", function () {endedHandler();});
@@ -30,9 +30,9 @@
         } else { dp.notice("视频已准备就绪，即将为您播放");setTimeout(function () {video_play() }, 1 * 1000);}
                    dp.on("timeupdate", function () {timeupdateHandler();});
 	}
-	//播放进度回调
+	//播放进度回调  	
     function timeupdateHandler() {setCookie("time_"+ vodurl,dp.video.currentTime,24);}
-    //播放结束回调
+    //播放结束回调		
     function endedHandler() {
     setCookie("time_"+ vodurl,"",-1);
     if (next!='') {dp.notice("5s后,将自动为您播放下一集");setTimeout(function () {video_next();}, 5 * 1000);
@@ -62,7 +62,7 @@
     var sendtype =$('.yzm-yzmplayer-comment-input').attr("dmtype");
     var sendcolor = $('.yzmplayer-comment-input').css("color"); 
     var sendtext = sendtexts.replace(new RegExp(pbgjz.join('|'),'img'),'*');
-    if(sendtext.length < 1){dp.notice("要输入弹幕内容啊喂");return;
+    if(sendtext.length < 1){dp.notice("要输入弹幕内容啊喂！");return;
     }else{dp.danmaku.send({text: sendtext,color: sendcolor,type: sendtype,});
     };
     $(".yzm-yzmplayer-comment-input").val("");
@@ -91,7 +91,7 @@ $(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {
          setTimeout(function () {$("#link2").fadeIn();}, 1 * 1000);
          setTimeout(function () {$("#link3,#span").fadeIn();}, 2 * 1000);
          $(".yzmplayer-fulloff-icon").on("click", function () {dp.fullScreen.cancel();})
-    //播放loading元素
+    //播放loading元素		
 function video_play() {
          $("#link3").text("视频已准备就绪，即将为您播放");
          setTimeout(function () {dp.play();$("#loading-box").remove();}, 1 * 1500);
@@ -99,7 +99,7 @@ function video_play() {
 function video_con_play() {
         if( laoding > 0)
         {
-         var conplayer = ` <e>已播放至${ctime},继续上次播放？</e><d class="conplay-jump">是<i id="num">10</i>s</d><d class="conplaying">否</d>`
+         var conplayer = ` <e>已播放至${ctime}，继续上次播放？</e><d class="conplay-jump">是 <i id="num">10</i>s</d><d class="conplaying">否</d>`
          $("#link3").html(conplayer);
          //setTimeout(function () {$("#laoding-pic,.memory-play-wrap,#loading-box").remove();dp.play();}, 15 * 1000);
          var span = document.getElementById('num');
@@ -115,7 +115,7 @@ function video_con_play() {
 		},1000);
 	},1 );
 	}else{dp.play();}
-         var cplayer = `<div class="memory-play-wrap"><div class="memory-play"><span class="close">×</span><span>上次看到</span><span>${ctime}</span><span class="play-jump">跳转播放</span></div></div>`
+         var cplayer = `<div class="memory-play-wrap"><div class="memory-play"><span class="close">×</span><span>上次看到 </span><span>${ctime}</span><span class="play-jump">跳转播放</span></div></div>`
              $(".yzmplayer-cplayer").append(cplayer);
              $(".close").on("click", function () {$(".memory-play-wrap").remove();});
              setTimeout(function () {$(".memory-play-wrap").remove();}, 20 * 1000);
