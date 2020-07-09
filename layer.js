@@ -1,3 +1,5 @@
+;
+!
 function(e, t) {
 	"use strict";
 	var i, n, a = e.layui && layui.define,
